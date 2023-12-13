@@ -212,3 +212,5 @@ The exact files, names and directories are arbitrary. The end goal is to use `do
 https://cloudkatha.com/how-to-install-nginx-on-amazon-linux-2-instance/
 
 https://docs.servicestack.net/deploy-netcore-to-amazon-linux-2-ami#install.net-6.0
+
+https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli

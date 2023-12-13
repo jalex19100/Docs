@@ -50,7 +50,9 @@ jobs:
     - name: Publish
       run: dotnet publish -r linux-x64 -o site;zip -r Application.zip site
     - name: DB bundle
-      run: dotnet-ef migrations bundle --self-contained -r linux-x64
+      run: |
+        dotnet tool install -g dotnet-ef --version 6.0.25
+        dotnet-ef migrations bundle --self-contained -r linux-x64
     - name: Release
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

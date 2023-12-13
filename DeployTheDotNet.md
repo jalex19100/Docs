@@ -49,13 +49,17 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Publish
       run: dotnet publish -r linux-x64 -o site;zip -r Application.zip site
+    - name: DB bundle
+      run: dotnet-ef migrations bundle --self-contained -r linux-x64
     - name: Release
       env:
-       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-       files: Application.zip
+        files: |
+          Application.zip
+          efbundle
 ```
 
 ## Setup an EC2 Instance in AWS

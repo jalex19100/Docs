@@ -185,6 +185,8 @@ vi /app/site/appsettings.json # add any settings (hint: if you used user-secrets
 
 # If the dotnet app needs database setup, install dotnet-ef
 dotnet tool install -g dotnet-ef --version 6.0.25
+# add ~/.dotnet/tools/ to your path temporarily
+. /etc/profile.d/dotnet-cli-tools-bin-path.sh
 dotnet ef database update
 
 nohup dotnet site/your_app.dll &

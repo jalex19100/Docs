@@ -124,7 +124,7 @@ server {
     server_name ALB_HOSTNAME;
 
     location / {
-        proxy_pass http://localhost:5000;
+        proxy_pass https://localhost:5001;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection keep-alive;
@@ -178,13 +178,13 @@ Example of settings (values populated via IConfiguration in your app) to add in 
 ### Setup the app
 ```
 # Doesn't really matter where you download or run this from. I will use /app/site
-sudo mkdir /app
-sudo chmod 775 /app
-cd /app
-curl -sO https://github.com/your_name/your_app/releases/download/v1.0/your_app.zip
+sudo mkdir /site
+sudo chmod 775 /site
+cd /
+curl -s -o /tmp/your_app.zip https://github.com/your_name/your_app/releases/download/v1.0/your_app.zip
 
 # In our example, the app zip file unzips into a /site directory
-unzip your_app.zip
+unzip /tmp/your_app.zip
 
 # update any configuration files or set environment variables
 # nano, ex and vi editors are often available to use

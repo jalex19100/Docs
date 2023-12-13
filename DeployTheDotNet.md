@@ -81,9 +81,10 @@ For a dotnet application with target runtime 6.
 # Enable access to microsoft RPMS
 sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 
-# Install a dotnet SDK, Runtime and the Nginx web server
+# Install a dotnet SDK, Runtime, the Nginx web server, postgres client CLI
 sudo yum install aspnetcore-runtime-6.0  dotnet-sdk-6.0 amazon-linux-extras -y
 sudo amazon-linux-extras install nginx1
+sudo amazon-linux-extras install postgresql10
 
 # start Nginx
 sudo systemctl start nginx.service
@@ -146,6 +147,13 @@ server {
 Create the database you need. Save the connection info to use in your application settings.
 
 For security groups, go with automatic, set it up to only allow your EC2 instance inbound. It should even show your EC2 instance in a drop-down in that section of the settings. This is why the EC2 instance is setup first.
+
+```
+sql -h __________.us-east-1.rds.amazonaws.com -U postgres -W   # update the host with your DB hostname
+postgres=# create database mydb;
+postgres=# create user myuser with encrypted password 'mypass';
+postgres=# grant all privileges on database mydb to myuser;
+```
 
 ## Run the .net app
 

@@ -88,9 +88,6 @@ sudo amazon-linux-extras install nginx1
 # start Nginx
 sudo systemctl start nginx.service
 
-# If the dotnet app needs database setup, install dotnet-ef
-dotnet tool install -g dotnet-ef --version 6.0.25
-dotnet ef database update
 
 ```
 
@@ -184,6 +181,11 @@ unzip your_app.zip
 # update any configuration files or set environment variables
 # nano, ex and vi editors are often available to use
 vi /app/site/appsettings.json # add any settings (hint: if you used user-secrets - that stuff)
+
+
+# If the dotnet app needs database setup, install dotnet-ef
+dotnet tool install -g dotnet-ef --version 6.0.25
+dotnet ef database update
 
 nohup dotnet site/your_app.dll &
 ```

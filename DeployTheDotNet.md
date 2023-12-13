@@ -159,7 +159,7 @@ postgres=# create user myuser with encrypted password 'mypass';
 postgres=# grant all privileges on database mydb to myuser;
 ```
 
-## Run the .net app
+## Runing the .net app
 
 Download your application file to the EC2 instance via wget or curl. If you zipped up your published files, in the GitHub Action above, and uploaded it to the Git Repo releases section, you would use something like this:
 
@@ -186,6 +186,7 @@ sudo mkdir /site
 sudo chmod 775 /site
 cd /
 curl -s -o /tmp/your_app.zip https://github.com/your_name/your_app/releases/download/v1.0/your_app.zip
+curl -s -o /tmp/efbundle https://github.com/your_name/your_app/releases/download/v1.0/efbundle
 
 # In our example, the app zip file unzips into a /site directory
 unzip /tmp/your_app.zip
@@ -195,11 +196,9 @@ unzip /tmp/your_app.zip
 vi /app/site/appsettings.json # add any settings (hint: if you used user-secrets - that stuff)
 
 
-# If the dotnet app needs database setup, install dotnet-ef
-dotnet tool install -g dotnet-ef --version 6.0.25
-# add ~/.dotnet/tools/ to your path temporarily
-. /etc/profile.d/dotnet-cli-tools-bin-path.sh
-dotnet ef database update
+# If the dotnet app needs database setup, run the efbundle built by your Github Action
+# NOTE: Change the connection string, similar to in your appsettings.json, to what your environment needs.
+/tmp/efbundle --connection "MovieBateDB": "Server=127.0.0.1;Port=5432;Database=your_app_db;"
 
 nohup dotnet site/your_app.dll &
 ```
